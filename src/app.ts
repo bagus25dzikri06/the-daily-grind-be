@@ -1,6 +1,11 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
 import authRoutes from './routes/auth.route'
+import categoryRoutes from './routes/category.route'
+import menuRoutes from './routes/menu.route'
+import bankRoutes from './routes/bank.route'
+import transactionRoutes from './routes/transaction.route'
+import path from 'path'
 
 const app = express()
 
@@ -12,10 +17,15 @@ app.use(express.urlencoded({
     limit: '10mb',
     extended: true
 }))
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
 
 app.use('/api/auth', authRoutes)
+app.use('/api/categories', categoryRoutes)
+app.use('/api/menus', menuRoutes)
+app.use('/api/banks', bankRoutes)
+app.use('/api/transactions', transactionRoutes)
 app.get('/', (req : Request, res : Response) => {
-    res.send('SportOn Backend Is Running')
+    res.send('The Daily Grind Backend Is Running')
 })
 
 export default app
