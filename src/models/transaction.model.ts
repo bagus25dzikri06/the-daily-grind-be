@@ -41,7 +41,7 @@ const TransactionSchema: Schema = new Schema({
         default: 'pending',
         required: true
     },
-    purchasedItems: {
+    purchasedMenus: {
         type: [PurchasedMenusSchema],
         required: true
     },
