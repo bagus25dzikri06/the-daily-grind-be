@@ -3,7 +3,7 @@ import mongoose, {Schema, Document} from "mongoose";
 export interface IMenu extends Document {
     name: string;
     description: string;
-    stock: number;
+    isAvailable: boolean;
     price: number;
     imageUrl: string;
     category: mongoose.Types.ObjectId;
