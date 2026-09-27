@@ -7,7 +7,7 @@ export interface IPurchasedMenus {
 
 export interface ITransaction extends Document {
     paymentProof: string;
-    status: 'pending' | 'paid' | 'in progress' | 'ready' | 'cancelled';
+    status: 'pending' | 'paid' | 'in progress' | 'ready' | 'cancelled' | 'refunded';
     purchasedMenus: IPurchasedMenus[];
     totalPayment: number;
     customerName: string;
@@ -37,7 +37,7 @@ const TransactionSchema: Schema = new Schema({
     },
     status: {
         type: String,
-        enum: ['pending', 'paid', 'in progress', 'ready', 'cancelled'],
+        enum: ['pending', 'paid', 'in progress', 'ready', 'cancelled', 'refunded'],
         default: 'pending',
         required: true
     },
