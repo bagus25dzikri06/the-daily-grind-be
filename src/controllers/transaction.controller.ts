@@ -1,6 +1,5 @@
 import {Request, Response} from "express"
 import Transaction from "../models/transaction.model"
-import Menu from "../models/menu.model"
 
 export const createTransaction = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -33,7 +32,7 @@ export const createTransaction = async (req: Request, res: Response): Promise<vo
         res.status(201).json(transaction)
     } catch (error) {
         res.status(500).json({
-            message: 'Error creating bank', error
+            message: 'Error creating transaction', error
         })
     }
 }
@@ -77,16 +76,6 @@ export const updateTransaction = async (req: Request, res: Response): Promise<vo
                 message: 'Transaction not found'
             })
             return
-        }
-
-        if (status === 'paid' && existingTransaction.status !== 'paid') {
-            for (const item of existingTransaction.purchasedMenus) {
-                await Menu.findByIdAndUpdate(item.menuId, {
-                    $inc: {
-                        stock: -item.qty
-                    },
-                })
-            }
         }
 
         const transaction = await Transaction.findByIdAndUpdate(
